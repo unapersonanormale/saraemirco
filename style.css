@@ -1,0 +1,980 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --ivory: #FEFCF9;
+  --cream: #F3F0EA;
+  --charcoal: #1C3528;
+  --gold: #7A5E12;
+  --gold-deco: #C8A530;
+  --gold-light: #B8973A;
+  --gold-pale: #D9C88E;
+  --warm-gray: #3D5E4A;
+  --warm-gray-light: #527257;
+  --border-gold: rgba(122, 94, 18, 0.35);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-sc: 'Cormorant SC', Georgia, serif;
+  --font-body: 'Jost', 'Helvetica Neue', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ───── Utility ───── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.section-label {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.gold-rule {
+  width: 64px;
+  height: 2px;
+  background: var(--gold-deco);
+  border: none;
+  margin: 0 auto;
+}
+
+.gold-rule-wide {
+  width: 100%;
+  max-width: 120px;
+  height: 1px;
+  background: var(--border-gold);
+  border: none;
+  margin: 2.5rem auto;
+}
+
+/* ───── Ornamental Divider ───── */
+
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 3rem 0;
+}
+.ornament::before,
+.ornament::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: var(--border-gold);
+}
+.ornament svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--gold-deco);
+  stroke-width: 1.6;
+}
+
+/* ───── Page Wrapper ───── */
+
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ───── Hero ───── */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.hero-border {
+  position: absolute;
+  inset: 20px;
+  border: 1px solid var(--border-gold);
+  pointer-events: none;
+}
+
+.monogram-ring {
+  width: 350px;
+  height: 250px;
+/*border: 2px solid var(--gold-deco);
+  border-radius: 50%;
+*/display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+.monogram-ring::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+/*border: 1px solid var(--border-gold);
+  border-radius: 50%; */
+}
+
+.monogram {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 3.4rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.hero-sfondo {
+  background-image: url('sm_forever.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-subtitle {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.75rem;
+  letter-spacing: 0.2em;
+  color: var(--warm-gray);
+  margin-bottom: 2rem;
+}
+
+.hero-names {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(4.2rem, 11vw, 6.6rem);
+  line-height: 1.15;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+}
+
+.hero-ampersand {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(2.8rem, 6vw, 3.8rem);
+  color: var(--gold-deco);
+  display: block;
+  margin: 0.3rem 0 0.2rem;
+}
+
+.hero-date {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.16em;
+  color: var(--warm-gray);
+  margin-top: 2rem;
+}
+
+.hero-venue-hint {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.55rem;
+  letter-spacing: 0.08em;
+  color: var(--warm-gray-light);
+  margin-top: 0.6rem;
+}
+
+/* ───── Countdown ───── */
+
+.countdown-section {
+  background: var(--cream);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  gap: clamp(1.2rem, 4vw, 3.5rem);
+  margin-top: 2.2rem;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 72px;
+}
+
+.countdown-number {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(4.2rem, 10vw, 6.2rem);
+  line-height: 1;
+  color: var(--charcoal);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  transition: opacity 0.3s ease;
+}
+
+.countdown-label {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: 0.16em;
+  color: var(--warm-gray);
+  margin-top: 0.65rem;
+}
+
+/* ───── Ceremony & Reception ───── */
+
+.events-section {
+  padding: 5.5rem 0;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin-top: 2.5rem;
+}
+
+.event-block {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.events-divider {
+  width: 1px;
+  background: var(--border-gold);
+  align-self: stretch;
+}
+
+.event-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 3rem;
+  color: var(--charcoal);
+  margin-bottom: 1.2rem;
+}
+
+.event-time {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.event-place {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.9rem;
+  color: var(--charcoal);
+  margin-bottom: 0.35rem;
+}
+
+.event-address {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.45rem;
+  color: var(--warm-gray);
+  line-height: 1.65;
+  margin-bottom: 1.3rem;
+}
+
+.btn-map {
+  display: inline-block;
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 0.85rem 2.2rem;
+  text-decoration: none;
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+.btn-map:hover,
+.btn-map:focus-visible {
+  background: var(--charcoal);
+  color: var(--ivory);
+  border-color: var(--charcoal);
+}
+
+/* ───── Timeline / Details ───── */
+
+.details-section {
+  background: var(--cream);
+  padding: 5.5rem 2rem;
+}
+
+.timeline {
+  max-width: 560px;
+  margin: 2.5rem auto 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-gold);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: 0;
+  margin-bottom: 2.8rem;
+}
+
+.timeline-time {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-align: right;
+  padding-right: 1.5rem;
+  padding-top: 0.15rem;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--gold-deco);
+  border-radius: 50%;
+  background: var(--cream);
+  position: relative;
+  z-index: 1;
+  margin-top: 0.3rem;
+}
+
+.timeline-content {
+  padding-left: 1.5rem;
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.85rem;
+  color: var(--charcoal);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.45rem;
+  color: var(--warm-gray);
+  line-height: 1.6;
+}
+
+/* ───── Dress Code & Info ───── */
+
+.info-section {
+  padding: 5.5rem 0;
+  text-align: center;
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  max-width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-card {
+  padding: 2.2rem 1.8rem;
+  border: 2px solid var(--border-gold);
+  text-align: center;
+}
+
+.info-card-icon {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 3.2rem;
+  color: var(--gold-deco);
+  margin-bottom: 0.8rem;
+  line-height: 1;
+}
+
+.info-card-title {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.45rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+
+.info-card-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.45rem;
+  color: var(--warm-gray);
+  line-height: 1.65;
+}
+
+/* ───── RSVP ───── */
+
+.rsvp-section {
+  background: var(--cream);
+  padding: 5.5rem 2rem;
+  text-align: center;
+}
+
+.rsvp-form {
+  max-width: 500px;
+  margin: 2.5rem auto 0;
+}
+
+.form-row {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  color: var(--warm-gray);
+  margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--charcoal);
+  background: var(--ivory);
+  border: 2px solid var(--gold-pale);
+  padding: 0.95rem 1.1rem;
+  letter-spacing: 0.02em;
+  outline: none;
+  transition: border-color 0.35s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(122, 94, 18, 0.12);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--warm-gray-light);
+  font-weight: 400;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B8963E' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Testo di aiuto sotto i campi */
+.form-hint {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--warm-gray-light);
+  line-height: 1.45;
+  margin-top: 0.45rem;
+  letter-spacing: 0.01em;
+}
+
+/* Campo numerico: frecce sempre visibili e comode da toccare */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: inner-spin-button;
+  appearance: auto;
+  opacity: 1;
+  height: 2.4rem;
+  cursor: pointer;
+}
+#rsvp-guests {
+  max-width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+.form-row-inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-submit {
+  display: inline-block;
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 0.14em;
+  color: var(--ivory);
+  background: var(--charcoal);
+  border: 2px solid var(--charcoal);
+  padding: 1.1rem 3.5rem;
+  cursor: pointer;
+  margin-top: 0.8rem;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+.btn-submit:hover,
+.btn-submit:focus-visible {
+  background: transparent;
+  color: var(--charcoal);
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.form-success {
+  display: none;
+  padding: 2rem;
+  text-align: center;
+}
+.form-success.show {
+  display: block;
+}
+
+.form-error {
+  display: none;
+  padding: 1.2rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+.form-error.show {
+  display: block;
+}
+.form-error-text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: #8C3A3A;
+  line-height: 1.5;
+}
+
+.btn-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(250,249,246,0.3);
+  border-top-color: var(--ivory);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+.btn-submit:hover .btn-spinner,
+.btn-submit:focus-visible .btn-spinner {
+  border-color: rgba(184,150,62,0.3);
+  border-top-color: var(--gold);
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.form-success-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.7rem;
+  color: var(--charcoal);
+  margin-bottom: 0.5rem;
+}
+.form-success-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.55rem;
+  color: var(--warm-gray);
+}
+
+/* ───── Gift / Lista Nozze ───── */
+
+.gift-section {
+  padding: 5.5rem 0;
+  text-align: center;
+}
+
+.gift-intro {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 2rem;
+  color: var(--warm-gray);
+  max-width: 560px;
+  margin: 1.5rem auto 2.5rem;
+  line-height: 1.7;
+}
+
+.gift-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.gift-card {
+  padding: 2.4rem 1.8rem;
+  border: 2px solid var(--border-gold);
+  text-align: center;
+  transition: border-color 0.4s ease;
+}
+.gift-card:hover {
+  border-color: var(--gold-light);
+}
+
+.gift-card-title {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.45rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.gift-card-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.45rem;
+  color: var(--warm-gray);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.gift-iban {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--charcoal);
+  letter-spacing: 0.06em;
+  background: var(--cream);
+  padding: 0.8rem 1.2rem;
+  border: 2px solid var(--gold-pale);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  position: relative;
+}
+.gift-iban:hover {
+  background: var(--gold-pale);
+}
+
+.gift-iban-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--ivory);
+  background: var(--charcoal);
+  padding: 0.3rem 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.gift-iban-tooltip.show {
+  opacity: 1;
+}
+
+.btn-gift-link {
+  display: inline-block;
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 0.85rem 2.2rem;
+  text-decoration: none;
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+.btn-gift-link:hover,
+.btn-gift-link:focus-visible {
+  background: var(--charcoal);
+  color: var(--ivory);
+  border-color: var(--charcoal);
+}
+
+.gift-copy-hint {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--warm-gray-light);
+  margin-top: 0.6rem;
+}
+
+/* ───── Footer ───── */
+
+.footer {
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  background: var(--cream);
+}
+
+.footer-names {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 3.5rem;
+  color: var(--charcoal);
+  margin-bottom: 0.5rem;
+}
+
+.footer-date {
+  font-family: var(--font-sc);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.16em;
+  color: var(--warm-gray);
+  margin-bottom: 2rem;
+}
+
+.footer-note {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.45rem;
+  color: var(--warm-gray-light);
+  letter-spacing: 0.04em;
+}
+
+/* ───── Section Shared ───── */
+
+.section-heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.9rem, 7.5vw, 4.3rem);
+  color: var(--charcoal);
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--warm-gray);
+  max-width: 520px;
+  margin: 0.5rem auto 0;
+  line-height: 1.6;
+}
+
+/* ───── Responsive ───── */
+
+@media (max-width: 760px) {
+  .page {
+    padding: 0 1.4rem;
+  }
+
+  .hero {
+    padding: 3rem 1.4rem;
+  }
+
+  .hero-border {
+    inset: 12px;
+  }
+
+  .monogram-ring {
+    width: 180px;
+    height: 150px;
+    margin-bottom: 2rem;
+  }
+
+  .monogram {
+    font-size: 2.8rem;
+  }
+
+  /* Countdown su due righe: molto piu leggibile su smartphone */
+  .countdown-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.2rem 1rem;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .countdown-number {
+    font-size: 4.4rem;
+  }
+
+  .countdown-label {
+    font-size: 1.3rem;
+  }
+
+  .countdown-section,
+  .details-section,
+  .rsvp-section {
+    padding: 4rem 1.4rem;
+  }
+
+  .events-section,
+  .info-section,
+  .gift-section {
+    padding: 4rem 0;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .events-divider {
+    width: 64px;
+    height: 2px;
+    margin: 0.5rem auto;
+  }
+
+  .event-block {
+    padding: 2rem 0.5rem;
+  }
+
+  .timeline::before {
+    left: 5px;
+  }
+
+  .timeline-item {
+    grid-template-columns: auto 1fr;
+    gap: 0;
+    margin-bottom: 2.4rem;
+  }
+
+  .timeline-time {
+    grid-column: 1 / -1;
+    text-align: left;
+    padding-right: 0;
+    padding-left: 2.2rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .timeline-dot {
+    margin-left: 0;
+  }
+
+  .timeline-content {
+    padding-left: 1.3rem;
+  }
+
+  .info-cards {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .gift-options {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .form-row-inline {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-row-inline .form-row {
+    margin-bottom: 1.5rem;
+  }
+
+  /* IBAN: va a capo invece di sfondare il layout */
+  .gift-iban {
+    font-size: 1.15rem;
+    letter-spacing: 0.03em;
+    word-break: break-all;
+    line-height: 1.5;
+  }
+
+  .btn-submit,
+  .btn-map,
+  .btn-gift-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ornament::before,
+  .ornament::after {
+    width: 40px;
+  }
+}
+
+/* Schermi molto stretti */
+@media (max-width: 380px) {
+  .countdown-number {
+    font-size: 3.8rem;
+  }
+
+  .hero-names {
+    font-size: 3.8rem;
+  }
+}
