@@ -79,6 +79,15 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    /* Honeypot: se il campo trappola e pieno, e un bot.
+       Fingiamo il successo e non inviamo nulla (comportamento
+       identico a un invio riuscito, cosi il bot non se ne accorge). */
+    if (form.elements.website && form.elements.website.value.trim() !== '') {
+      formWrap.style.display = 'none';
+      success.classList.add('show');
+      return;
+    }
+
     var name   = form.elements.name.value.trim();
     var email  = form.elements.email.value.trim();
     var attend = form.elements.attend.value;

@@ -225,6 +225,14 @@
     <div class="rsvp-form" id="rsvpFormWrap">
       <form id="rsvpForm" novalidate>
 
+        <!-- Honeypot anti-bot: invisibile agli umani, compilato dai bot.
+             Se arriva valorizzato, l'invio viene scartato in silenzio. -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="rsvp-website">Non compilare questo campo</label>
+          <input class="hp-input" type="text" id="rsvp-website" name="website"
+                 tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="form-row reveal">
           <label class="form-label" for="rsvp-name">nome e cognome</label>
           <input class="form-input" type="text" id="rsvp-name" name="name" placeholder="Es. Laura Bianchi" required>
